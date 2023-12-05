@@ -1,7 +1,7 @@
 import { Board, SHAPES } from './lib/board.js';
 import eventbus, { APP_EVENTS, $ } from './lib/eventbus.js';
 
-let board = new Board(50, 50);
+let board = new Board(100, 100);
 
 const startGameEffects = () => {
     $.startButtonDisabled = true;
@@ -19,7 +19,6 @@ eventbus.subscribe(APP_EVENTS.GAME_STOPPED, stopGameEffects);
 eventbus.subscribe(APP_EVENTS.GAME_STARTED, startGameEffects);
 
 document.addEventListener('DOMContentLoaded', () => {
-    board.render(document.getElementById('gamefield'));
     board.createRandom();
     [
         [

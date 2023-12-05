@@ -37,6 +37,7 @@
     top: 1em;
     left: 1em;
     color: #b093fb;
+    font-size: 0.5em;
 }
 
 main {
@@ -54,8 +55,21 @@ main {
 #gamefield {
     display: grid;
     grid-template-columns: repeat(var(--board-cols-count), min(90vw / var(--board-cols-count), 90vh / var(--board-rows-count)));
-    /* gap: 1px; */
     align-content: center;
+}
+
+#gamefield-canvas {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#gamefield-canvas canvas {
+    width: 90vw;
+    height: 90vh;
+    object-fit: contain;
+    opacity: 0.7;
+    image-rendering: crisp-edges;
 }
 
 .cell {
