@@ -85,9 +85,14 @@ main {
     display: flex;
     gap: 0.4em;
     align-items: center;
-    /* justify-content: center; */
     cursor: pointer;
     transition: all 0.15s;
+    min-width: 10rem;
+}
+
+#controls button svg.running {
+    opacity: 0;
+    transition: opacity 0.3s;
 }
 
 #controls button:hover {
@@ -100,6 +105,11 @@ main {
 
 #controls button:disabled {
     opacity: 0.5;
+    cursor: default;
+}
+
+#controls button:disabled svg.running {
+    opacity: 1;
 }
 
 button svg {

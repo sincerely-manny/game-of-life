@@ -3,31 +3,45 @@ import eventbus, { APP_EVENTS, $ } from './lib/eventbus.js';
 
 let board = new Board(30, 30);
 
-const bindControl = ([id, fn]) => {
-    document.getElementById(id).addEventListener('click', (e) => {
-        e.preventDefault();
-        board[fn]();
-    });
+const startGame = () => {
+    board.start();
+    $.startButtonDisabled = true;
+    $.startButtonText = 'Running...';
+    $.stopButtonDisabled = false;
 };
 
-/**
- *
- * @param {[id, fn][]} list [ElementId, BoardMethodName]
- */
-const bindAllControls = (list) => {
-    list.forEach(bindControl);
+const stopGame = () => {
+    board.stop();
+    $.startButtonDisabled = false;
+    $.startButtonText = 'Start';
+    $.stopButtonDisabled = true;
 };
 
 document.addEventListener('DOMContentLoaded', () => {
     board.render(document.getElementById('gamefield'));
     board.createRandom();
-    bindAllControls([
-        ['start', 'start'],
-        ['stop', 'stop'],
-        ['random', 'createRandom'],
-    ]);
-    // eventbus.emit(APP_EVENTS.INIT_APP_SUCCESS);
-    // console.log($.startButtonDisabled);
-    // $.startButtonDisabled = false;
-    // $.startButtonDisabled = true;
+    [
+        ['start', startGame],
+        ['stop', stopGame],
+        [
+            'random',
+            () => {
+                stopGame();
+                board.createRandom();
+            },
+        ],
+        [
+            'clear',
+            () => {
+                stopGame();
+                board.clear();
+            },
+        ],
+    ].forEach(([id, fn]) => {
+        document.getElementById(id)?.addEventListener('click', (e) => {
+            e.preventDefault();
+            fn();
+        });
+    });
+    stopGame();
 });
