@@ -1,5 +1,5 @@
 import { Board } from './lib/board.js';
-import eventbus, { APP_EVENTS } from './lib/eventbus.js';
+import eventbus, { APP_EVENTS, $ } from './lib/eventbus.js';
 
 let board = new Board(30, 30);
 
@@ -26,6 +26,8 @@ document.addEventListener('DOMContentLoaded', () => {
         ['stop', 'stop'],
         ['random', 'createRandom'],
     ]);
-    eventbus.emit(APP_EVENTS.INIT_APP_SUCCESS);
-    const fff = eventbus.createSignal();
+    // eventbus.emit(APP_EVENTS.INIT_APP_SUCCESS);
+    // console.log($.startButtonDisabled);
+    // $.startButtonDisabled = false;
+    // $.startButtonDisabled = true;
 });
