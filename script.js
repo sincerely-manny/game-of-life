@@ -1,4 +1,4 @@
-import { Board } from './lib/board.js';
+import { Board, SHAPES } from './lib/board.js';
 import eventbus, { APP_EVENTS, $ } from './lib/eventbus.js';
 
 let board = new Board(30, 30);
@@ -17,6 +17,8 @@ const stopGame = () => {
     $.stopButtonDisabled = true;
 };
 
+eventbus.subscribe(APP_EVENTS.GAME_STOPPED, stopGame);
+
 document.addEventListener('DOMContentLoaded', () => {
     board.render(document.getElementById('gamefield'));
     board.createRandom();
@@ -27,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
             'random',
             () => {
                 stopGame();
+                // board.createShape(SHAPES.glider);
                 board.createRandom();
             },
         ],
