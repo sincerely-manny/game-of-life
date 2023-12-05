@@ -32,6 +32,13 @@
     line-height: 1.5em;
 }
 
+#metrics {
+    position: fixed;
+    top: 1em;
+    left: 1em;
+    color: #b093fb;
+}
+
 main {
     min-width: 100vw;
     min-height: 100vh;

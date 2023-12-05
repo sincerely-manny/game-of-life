@@ -1,34 +1,43 @@
 import { Board, SHAPES } from './lib/board.js';
 import eventbus, { APP_EVENTS, $ } from './lib/eventbus.js';
 
-let board = new Board(30, 30);
+let board = new Board(50, 50);
 
-const startGame = () => {
-    board.start();
+const startGameEffects = () => {
     $.startButtonDisabled = true;
     $.startButtonText = 'Running...';
     $.stopButtonDisabled = false;
 };
 
-const stopGame = () => {
-    board.stop();
+const stopGameEffects = () => {
     $.startButtonDisabled = false;
     $.startButtonText = 'Start';
     $.stopButtonDisabled = true;
 };
 
-eventbus.subscribe(APP_EVENTS.GAME_STOPPED, stopGame);
+eventbus.subscribe(APP_EVENTS.GAME_STOPPED, stopGameEffects);
+eventbus.subscribe(APP_EVENTS.GAME_STARTED, startGameEffects);
 
 document.addEventListener('DOMContentLoaded', () => {
     board.render(document.getElementById('gamefield'));
     board.createRandom();
     [
-        ['start', startGame],
-        ['stop', stopGame],
+        [
+            'start',
+            () => {
+                board.start();
+            },
+        ],
+        [
+            'stop',
+            () => {
+                board.stop();
+            },
+        ],
         [
             'random',
             () => {
-                stopGame();
+                board.stop();
                 // board.createShape(SHAPES.glider);
                 board.createRandom();
             },
@@ -36,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
         [
             'clear',
             () => {
-                stopGame();
+                board.stop();
                 board.clear();
             },
         ],
@@ -46,5 +55,5 @@ document.addEventListener('DOMContentLoaded', () => {
             fn();
         });
     });
-    stopGame();
+    stopGameEffects();
 });
