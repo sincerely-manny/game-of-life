@@ -47,7 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
             'random',
             () => {
                 board.stop();
-                // board.createShape(SHAPES.glider);
                 board.createRandom();
             },
         ],
@@ -63,6 +62,9 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             fn();
         });
+    });
+    document.getElementById('speed')?.addEventListener('change', (e) => {
+        board.setIntervalValue(1000 - parseInt(e.target.value));
     });
     stopGameEffects();
 });

@@ -149,12 +149,25 @@ button svg {
 
 #settings label {
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 1fr 4em;
     box-sizing: border-box;
     padding: 0.5rem;
     margin: 0;
+    gap: 1em;
 }
 
 #settings input {
-    width: 5em;
+    color: var(--color-primary-a50);
+    background: transparent;
+    border: 0;
+    outline: 1px solid var(--color-alt-a30);
+    border-radius: 0.25em;
+    padding: 0.1em 0.4em;
+    box-sizing: border-box;
+}
+
+#speed-label {
+    display: grid;
+    grid-template-columns: 1fr 10em;
+    column-gap: 1em;
 }
