@@ -1,7 +1,13 @@
 import { Board, SHAPES } from './lib/board.js';
 import eventbus, { APP_EVENTS, $ } from './lib/eventbus.js';
 
-let board = new Board(1000, 1000);
+const urlParams = new URLSearchParams(window.location.search);
+
+let board = new Board(
+    parseInt(urlParams.get('width')) || undefined,
+    parseInt(urlParams.get('height')) || undefined,
+    parseInt(urlParams.get('threads')) || undefined
+);
 
 const startGameEffects = () => {
     $.startButtonDisabled = true;
@@ -19,6 +25,10 @@ eventbus.subscribe(APP_EVENTS.GAME_STOPPED, stopGameEffects);
 eventbus.subscribe(APP_EVENTS.GAME_STARTED, startGameEffects);
 
 document.addEventListener('DOMContentLoaded', () => {
+    $.width = urlParams.get('width') || 30;
+    $.height = urlParams.get('height') || 30;
+    $.threads = urlParams.get('threads') || 0;
+
     board.createRandom();
     [
         [
