@@ -1,7 +1,7 @@
 import { Board, SHAPES } from './lib/board.js';
 import eventbus, { APP_EVENTS, $ } from './lib/eventbus.js';
 
-let board = new Board(100, 100);
+let board = new Board(1000, 1000);
 
 const startGameEffects = () => {
     $.startButtonDisabled = true;
