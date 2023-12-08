@@ -70,6 +70,7 @@ main {
     object-fit: contain;
     opacity: 0.7;
     image-rendering: crisp-edges;
+    cursor: crosshair;
 }
 
 .cell {
@@ -93,6 +94,34 @@ main {
     right: 1rem;
     display: grid;
     gap: 0.5rem;
+    max-height: calc(100vh - 1rem);
+    overflow-y: scroll;
+    box-sizing: border-box;
+    padding-bottom: 1em;
+    transition: all 0.3s ease-out;
+}
+
+#controls #showhide {
+    margin-bottom: 1rem;
+    transition: all 0.3s ease-out;
+}
+
+#controls #showhide svg {
+    transition: all 0.3s ease-out;
+}
+
+#controls.hidden {
+    transform: translateX(calc(100% - 1em));
+    padding-left: 2em;
+    opacity: 0.5;
+}
+
+#controls.hidden #showhide {
+    transform: translateX(-2em);
+}
+
+#controls.hidden #showhide svg {
+    transform: rotateY(180deg);
 }
 
 #controls button {

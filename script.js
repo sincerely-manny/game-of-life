@@ -57,6 +57,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 board.clear();
             },
         ],
+        [
+            'showhide',
+            () => {
+                document.getElementById('controls').classList.toggle('hidden');
+            },
+        ],
     ].forEach(([id, fn]) => {
         document.getElementById(id)?.addEventListener('click', (e) => {
             e.preventDefault();
